@@ -1,4 +1,3 @@
-447
 A
 a / an:(not expressed in Somali; use the noun alone)
 
@@ -267,7 +266,7 @@ maammulan
 g un2 iddaarad, iddaaro,
 lacagmaamulid, maammul, maamul, tadbiir, talb
 administrative: agaasin, degmo, jiho, maammul
-administrative regio£: gobol
+administrative region: gobol
 administrator : fuliye , maammule, maamuliy^
 
 maareeye
