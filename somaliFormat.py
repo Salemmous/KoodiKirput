@@ -10,6 +10,7 @@ class SomWord:
         parts = str.split(':')
         self.word = parts[0]
         self.definition = parts[1]
+        self.definition = self.processDefinition(self.definition)
         if self.definition.startswith(" "):
             self.definition = self.definition[1:]
         if self.word.endswith(" "):
@@ -19,10 +20,13 @@ class SomWord:
         if self.definition.endswith(","):
             self.definition += " "
         self.definition += appending
+        self.definition = self.processDefinition(self.definition)
 
     def processDefinition(self, definition):#process the rest of the definition, so that it can easily be read by a human
         definition = definition.replace("{", "(")
         definition = definition.replace("}", ")")
+        definition = definition.replace("<", "&#60;")
+        definition = definition.replace(">", "&#62;")
         return  definition
 
 VALID_START_LINE = 0 #constant indicating that the current line is a new entry
@@ -45,7 +49,7 @@ def isNumber(s):
 def typeOfLine(line):
     if ":" in line:
         return VALID_START_LINE
-    elif "EnglishIndex" in line:
+    elif "Englishindex" in line:
         return UNVALID_LINE
     elif len(line) > 5:
         return VALID_STARTED_LINE
@@ -56,11 +60,19 @@ def typeOfLine(line):
     else:
         return UNVALID_LINE
 
+def purify(line):
+    parts = line.split("EnglishIndex")
+    line = parts[0][:-1] + parts[1]
+    return line
+
 #open the file and get all the words sorted
 with open('somali.txt') as f:
     lines = f.read().split("\n")
     #lines = f.readlines()
     for line in lines:
+        if "EnglishIndex" in line:
+            line = purify(line)
+        line = line.replace("&", "&#38;")
         type = typeOfLine(line)
         if type == VALID_START_LINE:
             words.append(SomWord(line))
@@ -77,6 +89,9 @@ for word in words:
     toWrite += "\t\t<field name=\"so\">" + word.definition + "</field>\n"
     toWrite += "\t</doc>\n"
 toWrite += "</add>"
+
+toWrite = toWrite.replace("", "")
+
 file = open("somAddRequest.txt","w")
 file.write(toWrite)
 file.close()
