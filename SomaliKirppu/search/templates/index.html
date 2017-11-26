@@ -35,7 +35,6 @@ $(function()
                         }
                         response(data, function(item)
                         {
-                        console.log("hey");
                           return {
                             label: item,
                             value: item
@@ -43,9 +42,23 @@ $(function()
                         })
                     }
                 });
+        },
+        select: function(e, ui)
+        {
+            //alert(ui.item.value);
+            searchWord(ui.item.value);
         }
     });
 });
+
+function searchWord( word )
+{
+    window.location.href = '/search/' + word;
+}
+function searchClick()
+{
+    searchWord(document.getElementById("search").value);
+}
 </script>
     <meta charset="UTF-8">
     <title>English-Somali Dictionary</title>
@@ -53,6 +66,11 @@ $(function()
 <body>
     <h1>Search a word!</h1>
     <span>Word to search for:</span>
-    <input id="search" />
+    <input id="search" value="{{ word }}" />
+    <button onclick="searchClick()">Search</button>
+    {% if word and result %}
+        <br /><h2>{{ word }}</h2>
+        <span>{{ result }}</span>
+    {% endif %}
 </body>
 </html>
