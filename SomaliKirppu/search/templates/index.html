@@ -15,8 +15,6 @@ $(function()
         {
                 $.ajax(
                 {
-                    type: "GET", //rest Type
-                    dataType: 'jsonp', //mispelled
                     url: "http://localhost:8983/solr/somali/select?q=en:" + request.term + "*",
                     dataType: "jsonp",
                     jsonp: 'json.wrf',

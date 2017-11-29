@@ -2,7 +2,6 @@
 from django.http import HttpResponse
 from django.template import loader
 import requests
-import json
 
 
 def index(request):
@@ -10,6 +9,10 @@ def index(request):
     context = {    }
     return HttpResponse(template.render(context, request))
 def translation(request, word):
+    if word == 'templatehtml':
+        template = loader.get_template('template.html')
+        context = {    }
+        return HttpResponse(template.render(context, request));
     template = loader.get_template('index.html')
     r = requests.get('http://localhost:8983/solr/somali/select?q=en:"' + word + '"');
     response = r.json();
