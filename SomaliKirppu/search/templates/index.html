@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$(function()
+{
+    $("#search").autocomplete(
+    {
+        source: function( request, response )
+        {
+                $.ajax(
+                {
+                    url: "http://localhost:8983/solr/somali/select?q=en:" + request.term + "*",
+                    dataType: "jsonp",
+                    jsonp: 'json.wrf',
+                    type: "GET",
+                    success: function( data )
+                    {
+                        data=parse();
+                        function parse()
+                        {
+                            var features=[];
+                            for(var i=0;i<data.response.docs.length;i++)
+                            {
+                                features[i]=data.response.docs[i].en[0];
+                            }
+                            return features;
+                        }
+                        response(data, function(item)
+                        {
+                          return {
+                            label: item,
+                            value: item
+                          }
+                        })
+                    }
+                });
+        },
+        select: function(e, ui)
+        {
+            //alert(ui.item.value);
+            searchWord(ui.item.value);
+        }
+    });
+});
+
+function searchWord( word )
+{
+    window.location.href = '/search/' + word;
+}
+function searchClick()
+{
+    searchWord(document.getElementById("search").value);
+}
+</script>
     <meta charset="UTF-8">
     <title>English-Somali Dictionary</title>
 </head>
 <body>
     <h1>Search a word!</h1>
     <span>Word to search for:</span>
-    <input id="search" />
+    <input id="search" value="{{ word }}" />
+    <button onclick="searchClick()">Search</button>
+    {% if word and result %}
+        <br /><h2>{{ word }}</h2>
+        <span>{{ result }}</span>
+    {% endif %}
 </body>
 </html>

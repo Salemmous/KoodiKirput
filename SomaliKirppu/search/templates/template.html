@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" href="[BOOTSTRAP CSS CDN ADDRESS]bootstrap.min.css">
+	<link rel="stylesheet" href="[SELECT2 CSS CDN ADDRESS]select2.css">
+	<style type="text/css">
+		body {
+		padding: 20px;
+		}
+	</style>
+
+	<!-- scripts -->
+	<script src="[JQUERY JS CDN ADDRESS]jquery-3.2.1.min.js"></script>
+	<script src="[SELECT2 JS CDN ADDRESS]select2.js"></script>
+
+	<script>
+	
+	
+	$(function(){
+		// turn the element to select2 select style
+		$("#exampleSelect1").select2({
+		  ajax: {
+		    url: "http://[JSON WORD LIST ADDRESS]",
+		    dataType: 'json',
+		    delay: 250,
+		    data: function (params) {
+		      return {
+		        q: params.term, // search term
+		        page: params.page
+		      };
+		    },
+		    processResults: function (data, params) {
+		      return {
+		        results: data
+		      };
+		    },
+		  },
+		}).on('select2:select', function(){
+			window.location.href = '?id=' +  $(this).val();
+		});
+	});
+	
+	</script>
+</head>
+
+<body>
+<div class="h4 container text-center">
+Suomi&#8212;somali&#8212;suomi-sanakirja
+</div>
+<p class="h6"><br /></p>
+<div class="container text-center" style="width: 95%;">
+  <select class="form-control-lg" id="exampleSelect1" style="width: 100%;">
+		<option value=""></option>
+	</select>
+</div>
+<p class="h1"><br /></p>
+
+<div class="jumbotron">[WORD NAME]</div>
+
+<form action="#" "class="container text-center">
+	<button type="submit" class="btn btn-secondary">Tyhjennä</button>
+</form>
+</body>
+
+</html>
