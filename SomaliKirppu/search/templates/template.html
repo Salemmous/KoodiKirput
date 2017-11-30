@@ -24,7 +24,7 @@
 		// turn the element to select2 select style
 		$("#exampleSelect1").select2({
 		  ajax: {
-		    url: "http://[JSON WORD LIST ADDRESS]",
+		    url: "http://localhost:8983/solr/somali/select?q=en:" + request.term + "*",
 		    dataType: 'json',
 		    delay: 250,
 		    data: function (params) {
@@ -49,7 +49,7 @@
 
 <body>
 <div class="h4 container text-center">
-Suomi&#8212;somali&#8212;suomi-sanakirja
+English&#8212;Somali Dictionary
 </div>
 <p class="h6"><br /></p>
 <div class="container text-center" style="width: 95%;">
@@ -59,7 +59,14 @@ Suomi&#8212;somali&#8212;suomi-sanakirja
 </div>
 <p class="h1"><br /></p>
 
-<div class="jumbotron">[WORD NAME]</div>
+<div class="jumbotron">{{ word }}
+	
+{% if word and result %}
+<br />
+<h2>{{ word }}</h2>
+<span>{{ result }}</span>
+{% endif %}
+</div>
 
 <form action="#" "class="container text-center">
 	<button type="submit" class="btn btn-secondary">Tyhjennä</button>
