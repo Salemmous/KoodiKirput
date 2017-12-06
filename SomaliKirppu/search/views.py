@@ -21,4 +21,3 @@ def translation(request, word):
                "result": response['response']['docs'][0]['so'][0]}
     return HttpResponse(template.render(context, request))
 
-# Create your views here.
