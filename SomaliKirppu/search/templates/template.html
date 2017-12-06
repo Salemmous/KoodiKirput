@@ -1,76 +1,155 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Koodikirppujen sanakirja</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- external stylesheets -->
+		<link rel="stylesheet" href="https://bootswatch.com/3/assets/css/custom.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css">
+		<link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-	<!-- stylesheets -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.css">
-	<style type="text/css">
-		body {
-		padding: 20px;
-		}
-	</style>
+		<!-- external scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+		<script src="https://bootswatch.com/3/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-	<!-- scripts -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script>
-	
-	
-	$(function(){
-		// turn the element to select2 select style
-		$("#exampleSelect1").select2({
-		  ajax: {
-		    url: "http://localhost:8983/solr/somali/select?q=en:" + request.term + "*",
-		    dataType: 'json',
-		    delay: 250,
-		    data: function (params) {
-		      return {
-		        q: params.term, // search term
-		        page: params.page
-		      };
-		    },
-		    processResults: function (data, params) {
-		      return {
-		        results: data
-		      };
-		    },
-		  },
-		}).on('select2:select', function(){
-			window.location.href = '?id=' +  $(this).val();
+		<!-- script for Select2 search box -->
+		<script>
+
+		$(function(){
+			// turn the element to select2 select style
+			$("#exampleSelect1").select2({
+				ajax: {
+					url: "http://localhost:8983/solr/somali/select?q=en:",
+					dataType: 'json',
+					placeholder: "Click to search words",
+					delay: 250,
+					data: function (params) {
+						return {
+						q: params.term, // search term
+						page: params.page
+						};
+					},
+					processResults: function (data, params) {
+						return {
+						results: data
+						};
+					},
+				},
+			}).on('select2:select', function(){
+				window.location.href = '?id=' +  $(this).val();
+			});
+			//$('#exampleSelect1').select2('open');
 		});
-	});
-	
-	</script>
-</head>
-
+		</script>
+	</head>
 <body>
-<div class="h4 container text-center">
-English&#8212;Somali Dictionary
-</div>
-<p class="h6"><br /></p>
-<div class="container text-center" style="width: 95%;">
-  <select class="form-control-lg" id="exampleSelect1" style="width: 100%;">
-		<option value=""></option>
-	</select>
-</div>
-<p class="h1"><br /></p>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">Koodikirput</a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+        	</div>
+	        <div class="navbar-collapse collapse" id="navbar-main">
+				<span class="navbar-text">
+					KIK-LG211 Building NLP Applications
+				</span>
+				<span class="navbar-text navbar-right">
+					Autumn 2017
+				</span>
+			</div>
+		</div>
+	</div>
+    <p>
+    	<div class="alert alert-dismissible alert-danger container">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>No niin!</strong> Tämän dialogin voi poistaa, jos emme tarvitse tai ehdi toteuttaa virheilmoituksia.
+		</div>
+		<div class="alert alert-dismissible alert-success container">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Ja tämä!</strong> Tämänkin dialogin voi poistaa, jos emme tarvitse tai ehdi toteuttaa positiivisiakaan ilmoituksia.
+		</div>
+	</p>
+    <div class="container page-header">
+		<div class="row">
+			<div class="col-lg-8 col-md-7 col-sm-6">
+				<h1>English-Somali Dictionary</h1>
+				<p class="lead">A project for University of Helsinki</p>
+			</div>
+		</div>
+	</div>
 
-<div class="jumbotron">{{ word }}
-	
-{% if word and result %}
-<br />
-<h2>{{ word }}</h2>
-<span>{{ result }}</span>
-{% endif %}
-</div>
+	<div class="container">
+		<div>
+			<select class="form-control-lg" id="exampleSelect1" style="width: 100%;"></select>
+		</div>
+     	<p></p>
+		<div>
+			<div class="bs-component">
+				<div class="well well-lg">
+					<h3>[Englanninkielinen sana tähän]</h3>
+					[Somalinkielinen vastaus tähän]
 
-<form action="#" "class="container text-center">
-	<button type="submit" class="btn btn-secondary">Tyhjennä</button>
-</form>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDictionaryWord">Edit word</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container text-center">
+		&copy; T. De Bluts &amp; P. Ahvenharju 2017
+	</div>
+
+	<!-- Modal for editing words -->
+
+	<div class="modal fade" id="addDictionaryWord" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-xs">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="defModalHead">Add New Word</h4>
+				</div>
+				<form class="form-horizontal" action="#insertActionURL">
+				<div class="modal-body">
+
+					<fieldset>
+						<div class="form-group">
+							<label for="word1" class="col-lg-2 control-label">English</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="word1" placeholder="Type in English word.." value="[Englanninkielinen sana tähän]">
+							</div>
+							</div>
+							<div class="form-group">
+								<label for="word2" class="col-lg-2 control-label">Somali</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="word2" placeholder="Type in Somali word.." value="[Somalinkielinen vastine tähän]">
+							</div>
+						</div>
+					</fieldset>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success">Save changes</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </body>
+
 
 </html>
