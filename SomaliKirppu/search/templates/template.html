@@ -71,18 +71,19 @@
 			</div>
 		</div>
 	</div>
-    <!--
+
     <p>
-    	<div class="alert alert-dismissible alert-danger container">
+    	{% if error %}
+		<div class="alert alert-dismissible alert-danger container">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>No niin!</strong> Tämän dialogin voi poistaa, jos emme tarvitse tai ehdi toteuttaa virheilmoituksia.
+			<strong>Upsala!</strong> {{ error }}
 		</div>
-		<div class="alert alert-dismissible alert-success container">
+		{% endif %}
+		<!--<div class="alert alert-dismissible alert-success container">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>Ja tämä!</strong> Tämänkin dialogin voi poistaa, jos emme tarvitse tai ehdi toteuttaa positiivisiakaan ilmoituksia.
-		</div>
+		</div>-->
 	</p>
-	-->
     <div class="container page-header">
 		<div class="row">
 			<div class="col-lg-8 col-md-7 col-sm-6">

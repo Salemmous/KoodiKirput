@@ -5,10 +5,6 @@ import requests
 
 
 def index(request):
-    template = loader.get_template('template.html')
-    context = {    }
-    return HttpResponse(template.render(context, request))
-def translation(request):
     id = request.GET.get('id');
     context = {}
     template = loader.get_template('template.html')
