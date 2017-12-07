@@ -25,7 +25,9 @@
 			// turn the element to select2 select style
 			$("#exampleSelect1").select2({
 				ajax: {
-					url: "/api/suggest/"+q,
+					url: function (params) {
+						return '/api/suggest/'+params.term;
+						},
 					dataType: 'json',
 					placeholder: "Click to search words",
 					delay: 250,
