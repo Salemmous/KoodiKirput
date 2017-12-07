@@ -6,6 +6,7 @@ import requests
 
 def index(request):
     id = request.GET.get('id');
+    message = request.GET.get('message');
     context = {}
     template = loader.get_template('template.html')
     if id != None:
@@ -18,6 +19,8 @@ def index(request):
                        "id": response['response']['docs'][0]['id']}
         else:
             context = {"error": "No word found for this ID"}
+    if message != None:
+        context["message"] = message;
     return HttpResponse(template.render(context, request))
 
 
