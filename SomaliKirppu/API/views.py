@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
+from django.http import HttpResponsePermanentRedirect
 from django.template import loader
 import requests
 import json
@@ -39,4 +40,5 @@ def edit(request):
                       headers={'Content-type': 'application/json'})
     r2 = requests.post("http://localhost:8983/solr/somali/update", data = '<commit />',
                                                                 headers = {'Content-type': 'text/xml'});
-    return HttpResponse("Change done" + editstr + "     " +  r.content.decode('utf-8')) #+ r2.content.decode('utf-8'))
+    #return HttpResponse("Change done" + editstr + "     " +  r.content.decode('utf-8')) #+ r2.content.decode('utf-8'))
+    return HttpResponsePermanentRedirect("/?message=Succesly edited: " + en)
