@@ -5,15 +5,15 @@ import requests
 
 
 def index(request):
-    template = loader.get_template('index.html')
+    template = loader.get_template('template.html')
     context = {    }
     return HttpResponse(template.render(context, request))
 def translation(request, word):
-    if word == 'templatehtml':
-        template = loader.get_template('template.html')
+    if word == 'indexhtml':
+        template = loader.get_template('index.html')
         context = {    }
         return HttpResponse(template.render(context, request));
-    template = loader.get_template('index.html')
+    template = loader.get_template('template.html')
     r = requests.get('http://localhost:8983/solr/somali/select?q=en:"' + word + '"');
     response = r.json();
 
