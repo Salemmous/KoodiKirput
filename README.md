@@ -14,5 +14,5 @@ API:
     Returns the suggestion in a JSON array (id + text, id being the id in Solr and text the English field) for the
     incomplete English search word <enword>.
 
-/api/edit/<id>/<en>/<so>
+/api/edit/<id>/<en>/<so>    or /api/edit?id=...&en=...&so=...
     Edit the entry based on the given id. <en> should be the field in English and <so> the field in Somali.

@@ -8,16 +8,17 @@ def index(request):
     template = loader.get_template('template.html')
     context = {    }
     return HttpResponse(template.render(context, request))
-def translation(request, word):
-    if word == 'indexhtml':
-        template = loader.get_template('index.html')
-        context = {    }
-        return HttpResponse(template.render(context, request));
+def translation(request):
+    id = request.GET.get('id');
+    context = {}
     template = loader.get_template('template.html')
-    r = requests.get('http://localhost:8983/solr/somali/select?q=en:"' + word + '"');
-    response = r.json();
+    if id != None:
+        r = requests.get('http://localhost:8983/solr/somali/select?q=id:"' + id + '"');
+        response = r.json();
 
-    context = {"word":response['response']['docs'][0]['en'][0],
-               "result": response['response']['docs'][0]['so'][0]}
+        context = {"en":response['response']['docs'][0]['en'][0],
+                   "so": response['response']['docs'][0]['so'][0],
+                   "id": response['response']['docs'][0]['id']}
     return HttpResponse(template.render(context, request))
+
 

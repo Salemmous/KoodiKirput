@@ -30,7 +30,10 @@ def translation(request, word):
     response = r.json();
     context = {"words":response['response']['docs']}
     return HttpResponse(template.render(context, request))
-def edit(request, id, en, so):
+def edit(request):
+    id = request.GET.get('id');
+    en = request.GET.get('en');
+    so = request.GET.get('so');
     editstr = '[{ "id" : "' + id + '", "en" : {"set":["' + en + '"]}, "so" : {"set":["' + so + '"]}}]'
     r = requests.post("http://localhost:8983/solr/somali/update", data = editstr,
                       headers={'Content-type': 'application/json'})
