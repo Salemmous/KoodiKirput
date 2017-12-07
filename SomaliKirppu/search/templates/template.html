@@ -29,7 +29,7 @@
 						return '/api/suggest/'+params.term;
 						},
 					dataType: 'json',
-					placeholder: "Click to search words",
+					placeholder: "{{ en }}",
 					delay: 250,
 					data: function (params) {
 						return {
@@ -94,7 +94,7 @@
 
 	<div class="container">
 		<div>
-			<select class="form-control-lg" id="exampleSelect1" style="width: 100%;"></select>
+			<select class="form-control-lg" id="exampleSelect1" style="width: 100%;">{{ en }}</select>
 		</div>
      	<p></p>
 		<div>
@@ -132,13 +132,13 @@
 						<div class="form-group">
 							<label for="word1" class="col-lg-2 control-label">English</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="en" placeholder="Type in English word.." value="{{ en }}">
+								<input type="text" name="en" class="form-control" id="word1" placeholder="Type in English word.." value="{{ en }}">
 							</div>
 							</div>
 							<div class="form-group">
 								<label for="word2" class="col-lg-2 control-label">Somali</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="so" placeholder="Type in Somali word.." value="{{ so }}">
+								<input type="text" name="so" class="form-control" id="word2" placeholder="Type in Somali word.." value="{{ so }}">
 							</div>
 						</div>
 					</fieldset>
