@@ -121,19 +121,20 @@
 					<h4 class="modal-title" id="defModalHead">Add New Word</h4>
 				</div>
 				<form class="form-horizontal" action="/api/edit/" method="get">
-				<div class="modal-body">
+					<input type="hidden" name="id" value="{{ id }}"/>
+					<div class="modal-body">
 
 					<fieldset>
 						<div class="form-group">
 							<label for="word1" class="col-lg-2 control-label">English</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="word1" placeholder="Type in English word.." value="[Englanninkielinen sana tähän]">
+								<input type="text" class="form-control" id="word1" placeholder="Type in English word.." value="englannin sana">
 							</div>
 							</div>
 							<div class="form-group">
 								<label for="word2" class="col-lg-2 control-label">Somali</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="word2" placeholder="Type in Somali word.." value="[Somalinkielinen vastine tähän]">
+								<input type="text" class="form-control" id="word2" placeholder="Type in Somali word.." value="Somalinkielinen vastine tähän">
 							</div>
 						</div>
 					</fieldset>
