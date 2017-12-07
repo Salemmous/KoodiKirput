@@ -20,6 +20,8 @@ def translation(request):
             context = {"en":response['response']['docs'][0]['en'][0],
                        "so": response['response']['docs'][0]['so'][0],
                        "id": response['response']['docs'][0]['id']}
+        else:
+            context = {"error": "No word found for this ID"}
     return HttpResponse(template.render(context, request))
 
 
