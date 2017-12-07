@@ -16,7 +16,6 @@ def suggest(request, word):
         word['id'] = doc['id'];
         word['text'] = doc['en'][0];
         suggestions.append(word);
-    #return HttpResponse(json.dumps({'suggestions': suggestions}, indent=4))
     return HttpResponse(json.dumps(suggestions, indent=4))
 
 def id(request, id):
@@ -36,9 +35,8 @@ def edit(request):
     en = request.GET.get('en');
     so = request.GET.get('so');
     editstr = '[{ "id" : "' + id + '", "en" : {"set":["' + en + '"]}, "so" : {"set":["' + so + '"]}}]'
-    r = requests.post("http://localhost:8983/solr/somali/update", data = editstr,
+    requests.post("http://localhost:8983/solr/somali/update", data = editstr,
                       headers={'Content-type': 'application/json'})
-    r2 = requests.post("http://localhost:8983/solr/somali/update", data = '<commit />',
+    requests.post("http://localhost:8983/solr/somali/update", data = '<commit />',
                                                                 headers = {'Content-type': 'text/xml'});
-    #return HttpResponse("Change done" + editstr + "     " +  r.content.decode('utf-8')) #+ r2.content.decode('utf-8'))
     return HttpResponsePermanentRedirect("/?message=Succesly edited: " + en)
