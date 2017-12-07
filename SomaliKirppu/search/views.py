@@ -16,9 +16,10 @@ def translation(request):
         r = requests.get('http://localhost:8983/solr/somali/select?q=id:"' + id + '"');
         response = r.json();
 
-        context = {"en":response['response']['docs'][0]['en'][0],
-                   "so": response['response']['docs'][0]['so'][0],
-                   "id": response['response']['docs'][0]['id']}
+        if len(response['response']['docs']) >= 1:
+            context = {"en":response['response']['docs'][0]['en'][0],
+                       "so": response['response']['docs'][0]['so'][0],
+                       "id": response['response']['docs'][0]['id']}
     return HttpResponse(template.render(context, request))
 
 
