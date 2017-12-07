@@ -25,7 +25,7 @@
 			// turn the element to select2 select style
 			$("#exampleSelect1").select2({
 				ajax: {
-					url: "http://localhost:8983/solr/somali/select?q=en:",
+					url: "/api/suggest/"+q,
 					dataType: 'json',
 					placeholder: "Click to search words",
 					delay: 250,
