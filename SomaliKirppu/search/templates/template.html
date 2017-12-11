@@ -29,8 +29,7 @@
 						return '/api/suggest/'+params.term;
 						},
 					dataType: 'json',
-					placeholder: "{{ en }}",
-					delay: 250,
+					delay: 150,
 					data: function (params) {
 						return {
 						q: params.term, // search term
@@ -43,10 +42,11 @@
 						};
 					},
 				},
+				placeholder: "{% if en %}{{ en }}{% else %}Click and type English to search{% endif %}",
+				allowClear: true
 			}).on('select2:select', function(){
 				window.location.href = '?id=' +  $(this).val();
 			});
-			//$('#exampleSelect1').select2('open');
 		});
 		</script>
 	</head>
@@ -97,19 +97,35 @@
 
 	<div class="container">
 		<div>
-			<select class="form-control-lg" id="exampleSelect1" style="width: 100%;">{{ en }}</select>
+			<select class="form-control-lg" id="exampleSelect1" style="width: 100%;">
+				<option></option>
+				{{ en }}
+			</select>
 		</div>
      	<p></p>
 		<div>
 			<div class="bs-component">
 				<div class="well well-lg">
+
+					{% if not id %}
+
+					<span class="text-muted">No search word defined</span>
+
+					{% else %}
+
 					<h3>{{ en }}</h3>
+
 					{{ so }}
 
+					{% endif %}
+
 				</div>
+				<!-- Show Edit button only if there's word to edit -->
+				{% if so %}
 				<div>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDictionaryWord">Edit word</button>
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -140,10 +156,10 @@
 							</div>
 							<div class="form-group">
 								<label for="word2" class="col-lg-2 control-label">Somali</label>
-							<div class="col-lg-10">
-								<input type="text" name="so" class="form-control" id="word2" placeholder="Type in Somali word.." value="{{ so }}">
+								<div class="col-lg-10">
+									<input type="text" name="so" class="form-control" id="word2" placeholder="Type in Somali word.." value="{{ so }}">
+								</div>
 							</div>
-						</div>
 					</fieldset>
 
 
