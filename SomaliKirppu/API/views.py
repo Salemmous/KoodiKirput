@@ -8,7 +8,7 @@ import json
 
 
 def suggest(request, word):
-    r = requests.get('http://localhost:8983/solr/somali/select?q=en:' + word + '*');
+    r = requests.get('http://localhost:8983/solr/somali/select?q=en:' + word + '%20OR%20en:' + word + '*');
     response = r.json();
     suggestions = [];
     for doc in response['response']['docs']:
